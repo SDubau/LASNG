@@ -1,0 +1,31 @@
+#**************************************************************
+# Apache2 Module
+#**************************************************************
+
+#LoadModule  proxy_module         /usr/lib/apache2/modules/mod_proxy.so
+#LoadModule  proxy_http_module    /usr/lib/apache2/modules/mod_proxy_http.so
+#LoadFile        /usr/lib/libxml2.so
+
+#**************************************************************
+# Allgemeine Proxy-Einstellungen
+#**************************************************************
+
+ProxyRequests Off
+ProxyStatus On
+ProxyPreserveHost On
+ProxyVia On
+
+<Location /status>
+ 	SetHandler server-status
+
+	Order Deny,Allow
+	Deny from all
+	Allow from all
+</Location>
+
+<Proxy *>
+	Order deny,allow
+	Allow from all
+</Proxy>
+
+Include /opt/LAS/conf/proxy.settings
